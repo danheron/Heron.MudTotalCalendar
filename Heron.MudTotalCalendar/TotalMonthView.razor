@@ -1,0 +1,95 @@
+@inherits MonthView<T>
+@typeparam T where T : CalendarItem
+
+@Render
+
+@code {
+
+    protected override RenderFragment RenderHeader =>
+        @<thead>
+        <tr>
+            @for (var i = 0; i < 7; i++)
+            {
+                <th>
+                    @Cells[i].Date.ToString("ddd")
+                </th>
+            }
+            <th>Total</th>
+        </tr>
+        </thead>;
+
+    protected override RenderFragment RenderBody =>
+        @<tbody>
+        @for (var week = 0; week < Cells.Count / 8; week++)
+        {
+            <tr style="@RowStyle">
+                @for (var i = week * 8; i < (week + 1) * 8; i++)
+                {
+                    var cell = Cells[i];
+                    @RenderCell(cell)
+                }
+            </tr>
+        }
+        @RenderMonthTotalRow
+        </tbody>;
+
+    protected virtual RenderFragment RenderMonthTotalRow =>
+        @<tr>
+            @for (var i = 0; i < 7; i++)
+            {
+                <td></td>
+            }
+            @RenderMonthTotalCell(Cells.Last())
+        </tr>;
+
+    protected virtual RenderFragment RenderDayTotalCell(CalendarCell<T> cell) =>
+        @<div class="mud-cal-month-cell" style="@DayStyle(cell)">
+            @RenderCellDayNumber(cell)
+            @foreach (var value in ((TotalCell<T>)cell).Values)
+            {
+                @RenderTotal(value, GetDayTotalStyle(value.Definition))
+            }
+            @RenderCellContents(cell)
+        </div>;
+
+    protected virtual RenderFragment RenderWeekTotalCell(CalendarCell<T> cell) =>
+        @<div class="mud-cal-month-cell mud-cal-total-cell" style="@DayStyle(cell)">
+            <div class="mud-cal-month-cell-title">Week Total</div>
+            @foreach (var value in ((TotalCell<T>)cell).Values)
+            {
+                @RenderTotal(value, GetWeekTotalStyle(value.Definition))
+            }
+        </div>;
+
+    protected virtual RenderFragment RenderMonthTotalCell(CalendarCell<T> cell) =>
+        @<div class="mud-cal-month-cell mud-cal-total-cell" style="@DayStyle(cell)">
+            <div class="mud-cal-month-cell-title">Month Total</div>
+            @foreach (var value in ((TotalCell<T>)cell).Values)
+            {
+                @RenderTotal(value, GetMonthTotalStyle(value.Definition))
+            }
+        </div>;
+
+    protected override RenderFragment RenderCell(CalendarCell<T> cell) =>
+        @<td>
+            @if (((TotalCell<T>)cell).WeekTotal)
+            {
+                @RenderWeekTotalCell(cell)
+            }
+            else if (((TotalCell<T>)cell).MonthTotal)
+            {
+                @RenderMonthTotalCell(cell)
+            }
+            else
+            {
+                @RenderDayTotalCell(cell)
+            }
+        </td>;
+
+    protected virtual RenderFragment RenderTotal(Value value, string style) =>
+        @<div class="mud-cal-total" style="@style">
+            <div class="mud-cal-total-name">@value.Definition.Name</div>
+            <div class="mud-cal-total-value">@FormatValue(value)</div>
+        </div>;
+
+}

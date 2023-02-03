@@ -1,0 +1,65 @@
+@using Heron.MudCalendar
+
+<MudTotalCalendar T="CalendarItem" Values="BuildTestData()" />
+
+@code {
+
+    public static string __description__ = "Basic MudTotalCalendar Tests";
+
+    private List<Value> BuildTestData()
+    {
+        var power = new ValueDefinition
+        {
+            Name = "Power",
+            Units = "kwh",
+            FormatString = "N2",
+            Color = "#ffcdd2"
+        };
+        var offpeak = new ValueDefinition
+        {
+            Name = "Off-peak",
+            Units = "CHF",
+            PrefixUnits = true,
+            FormatString = "N2",
+            Color = "#c8e6c9"
+        };
+        var peak = new ValueDefinition
+        {
+            Name = "Peak",
+            Units = "CHF",
+            PrefixUnits = true,
+            FormatString = "N2",
+            Color = "#bbdefb"
+        };
+        var total = new ValueDefinition
+        {
+            Name = "Total",
+            Units = "CHF",
+            PrefixUnits = true,
+            FormatString = "N2",
+            Color = "#ffecb3"
+        };
+
+        return new List<Value>
+        {
+            // Today
+            new Value { Date = DateTime.Today, Definition = power, Amount = 3.34 },
+            new Value { Date = DateTime.Today, Definition = peak, Amount = 4.34 },
+            new Value { Date = DateTime.Today, Definition = offpeak, Amount = 2.34 },
+            new Value { Date = DateTime.Today, Definition = total, Amount = 6.68 },
+            
+            // Tomorrow
+            new Value { Date = DateTime.Today.AddDays(-1), Definition = power, Amount = 4.89 },
+            new Value { Date = DateTime.Today.AddDays(-1), Definition = peak, Amount = 5.23 },
+            new Value { Date = DateTime.Today.AddDays(-1), Definition = offpeak, Amount = 3.32 },
+            new Value { Date = DateTime.Today.AddDays(-1), Definition = total, Amount = 8.55 },
+            
+            // The next day
+            new Value { Date = DateTime.Today.AddDays(-2), Definition = power, Amount = 2.97 },
+            new Value { Date = DateTime.Today.AddDays(-2), Definition = peak, Amount = 5.78 },
+            new Value { Date = DateTime.Today.AddDays(-2), Definition = offpeak, Amount = 2.98 },
+            new Value { Date = DateTime.Today.AddDays(-2), Definition = total, Amount = 8.76 }
+        };
+    }
+
+}
