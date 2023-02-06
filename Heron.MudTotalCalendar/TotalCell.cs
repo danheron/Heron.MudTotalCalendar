@@ -2,7 +2,7 @@ using Heron.MudCalendar;
 
 namespace Heron.MudTotalCalendar;
 
-public class TotalCell<T> : CalendarCell<T> where T : CalendarItem
+public class TotalCell : CalendarCell
 {
     public List<Value> Values { get; set; } = new();
     

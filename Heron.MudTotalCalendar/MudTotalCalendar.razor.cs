@@ -1,9 +1,8 @@
-using Heron.MudCalendar;
 using Microsoft.AspNetCore.Components;
 
 namespace Heron.MudTotalCalendar;
 
-public partial class MudTotalCalendar<T> : MudCalendar<T> where T : CalendarItem
+public partial class MudTotalCalendar : MudCalendar.MudCalendar
 {
     [Parameter]
     public List<Value> Values { get; set; } = new();

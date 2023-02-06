@@ -1,6 +1,5 @@
-@inherits MudCalendar<T>
+@inherits MudCalendar
 @using Microsoft.AspNetCore.Components.Rendering
-@typeparam T where T : CalendarItem
 
 @RenderHeader
 
@@ -8,14 +7,11 @@
 
 @code {
 
-    protected override RenderFragment RenderHeader =>
-        @<HeadContent>
-            @base.RenderHeaderContent
-            @RenderHeaderTotalContent
-        </HeadContent>;
-
-    protected virtual RenderFragment RenderHeaderTotalContent =>
-        @<link href="_content/Heron.MudTotalCalendar/Heron.MudTotalCalendar.min.css" rel="stylesheet"/>;
+    protected override RenderFragment RenderHeaderContent => __builder =>
+    {
+        base.RenderHeaderContent(__builder);
+        <link href="_content/Heron.MudTotalCalendar/Heron.MudTotalCalendar.min.css" rel="stylesheet"/>
+    };
 
     protected override RenderFragment RenderMonthView =>
         @<TotalMonthView Color="@Color" CurrentDay="@CurrentDay" HighlightToday="@HighlightToday" CellClicked="CellClicked" MinCellHeight="MonthMinHeight" CellTemplate="@(MonthTemplate ?? CellTemplate)" Items="@Items" Values="@Values"/>;

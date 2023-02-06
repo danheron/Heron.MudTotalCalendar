@@ -5,7 +5,7 @@ using MudBlazor.Utilities;
 
 namespace Heron.MudTotalCalendar;
 
-public partial class TotalMonthView<T> : MonthView<T> where T : CalendarItem
+public partial class TotalMonthView : MonthView
 {
     [Parameter]
     public List<Value> Values { get; set; } = new();
@@ -49,20 +49,20 @@ public partial class TotalMonthView<T> : MonthView<T> where T : CalendarItem
 
     protected override void BuildCells()
     {
-        var cells = new List<CalendarCell<T>>();
+        var cells = new List<CalendarCell>();
         var monthStart = new DateTime(CurrentDay.Year, CurrentDay.Month, 1);
         var monthEnd = monthStart.AddMonths(1).AddDays(-1);
 
         var range = new CalendarDateRange(CurrentDay, CalendarView.Month);
-        var totalMonth = new TotalCell<T> { MonthTotal = true };
+        var totalMonth = new TotalCell { MonthTotal = true };
         if (range.Start != null && range.End != null)
         {
             var date = range.Start.Value;
             var lastDate = range.End.Value;
-            var totalWeek = new TotalCell<T> { WeekTotal = true };
+            var totalWeek = new TotalCell { WeekTotal = true };
             while (date <= lastDate)
             {
-                var cell = new TotalCell<T> { Date = date };
+                var cell = new TotalCell { Date = date };
                 cells.Add(cell);
                 cell.AddValues(Values.Where(v => v.Date == date).ToList());
                 if (date.Date == DateTime.Today) cell.Today = true;
@@ -82,7 +82,7 @@ public partial class TotalMonthView<T> : MonthView<T> where T : CalendarItem
                 if (date.DayOfWeek == DayOfWeek.Sunday)
                 {
                     cells.Add(totalWeek);
-                    totalWeek = new TotalCell<T> { WeekTotal = true };
+                    totalWeek = new TotalCell { WeekTotal = true };
                 }
 
                 date = date.AddDays(1);
