@@ -17,6 +17,11 @@
   ],
 
   "features": {
+    // GitHub CLI
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "latest"
+    },
+
     // Install common utilities
     "ghcr.io/devcontainers/features/common-utils:1": {
       "installZsh": true,
