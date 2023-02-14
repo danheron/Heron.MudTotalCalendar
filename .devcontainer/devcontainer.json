@@ -13,10 +13,15 @@
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [
     // ASP.NET Core Web/API App, Blazor App
-    5000, 5001
+    5030, 5031
   ],
 
   "features": {
+    // GitHub CLI
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "latest"
+    },
+    
     // Install common utilities
     "ghcr.io/devcontainers/features/common-utils:1": {
       "installZsh": true,
@@ -56,6 +61,8 @@
       // Add the IDs of extensions you want installed when the container is created.
       "extensions": [
         "ms-dotnettools.csharp",
+        "ms-dotnettools.blazorwasm-companion",
+        "fernandoescolar.vscode-solution-explorer",
         "VisualStudioExptTeam.vscodeintellicode"
       ],
       "settings": {
