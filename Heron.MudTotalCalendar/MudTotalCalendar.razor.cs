@@ -14,6 +14,6 @@ public partial class MudTotalCalendar : MudCalendar.MudCalendar
         // Default to not showing the week and day views because they don't have totals.
         ShowWeek = false;
         ShowDay = false;
-        MonthMinHeight = 100;
+        MonthCellMinHeight = 100;
     }
 }

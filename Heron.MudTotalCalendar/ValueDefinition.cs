@@ -10,5 +10,9 @@ public class ValueDefinition
 
     public string FormatString { get; set; } = string.Empty;
 
-    public string Color { get; set; } = "--mud-palette-primary";
+    //public string Color { get; set; } = "--mud-palette-primary";
+    
+    public string Class { get; set; } = string.Empty;
+    
+    public string Style { get; set; } = string.Empty;
 }

@@ -44,7 +44,7 @@
             @RenderCellDayNumber(cell)
             @foreach (var value in ((TotalCell)cell).Values)
             {
-                @RenderTotal(value, GetDayTotalStyle(value.Definition))
+                @RenderTotal(value)
             }
             @RenderCellContents(cell)
         </div>;
@@ -54,7 +54,7 @@
             <div class="mud-cal-month-cell-title">Week Total</div>
             @foreach (var value in ((TotalCell)cell).Values)
             {
-                @RenderTotal(value, GetWeekTotalStyle(value.Definition))
+                @RenderTotal(value)
             }
         </div>;
 
@@ -63,7 +63,7 @@
             <div class="mud-cal-month-cell-title">Month Total</div>
             @foreach (var value in ((TotalCell)cell).Values)
             {
-                @RenderTotal(value, GetMonthTotalStyle(value.Definition))
+                @RenderTotal(value)
             }
         </div>;
 
@@ -83,8 +83,8 @@
             }
         </td>;
 
-    protected virtual RenderFragment RenderTotal(Value value, string style) =>
-        @<div class="mud-cal-total" style="@style">
+    protected virtual RenderFragment RenderTotal(Value value) =>
+        @<div class="@GetTotalClassname(value.Definition)" style="@GetTotalStyle(value.Definition)">
             <div class="mud-cal-total-name">@value.Definition.Name</div>
             <div class="mud-cal-total-value">@FormatValue(value)</div>
         </div>;

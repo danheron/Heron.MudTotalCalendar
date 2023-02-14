@@ -9,24 +9,19 @@ public partial class TotalMonthView : MonthView
 {
     [Parameter]
     public List<Value> Values { get; set; } = new();
-    
-    protected virtual string GetDayTotalStyle(ValueDefinition definition)
+
+    protected virtual string GetTotalClassname(ValueDefinition definition)
     {
-        return $"background-color: {definition.Color}";
+        return new CssBuilder("mud-cal-total")
+            .AddClass(definition.Class)
+            .Build();
     }
-    
-    protected virtual string GetWeekTotalStyle(ValueDefinition definition)
+
+    protected virtual string GetTotalStyle(ValueDefinition definition)
     {
-        //return $"background-color: {definition.Color}; filter: brightness(0.9);";
-        return GetDayTotalStyle(definition);
+        return definition.Style;
     }
-    
-    protected virtual string GetMonthTotalStyle(ValueDefinition definition)
-    {
-        //return $"background-color: {definition.Color}; filter: brightness(0.85);";
-        return GetDayTotalStyle(definition);
-    }
-    
+
     protected virtual string FormatValue(Value value)
     {
         var sb = new StringBuilder();
@@ -47,7 +42,7 @@ public partial class TotalMonthView : MonthView
         return sb.ToString();
     }
 
-    protected override void BuildCells()
+    protected override List<CalendarCell> BuildCells()
     {
         var cells = new List<CalendarCell>();
         var monthStart = new DateTime(CurrentDay.Year, CurrentDay.Month, 1);
@@ -91,6 +86,6 @@ public partial class TotalMonthView : MonthView
 
         cells.Add(totalMonth);
 
-        Cells = cells;
+        return cells;
     }
 }

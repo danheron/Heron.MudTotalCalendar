@@ -1,8 +1,6 @@
 @inherits MudCalendar
 @using Microsoft.AspNetCore.Components.Rendering
 
-@RenderHeader
-
 @Render
 
 @code {
@@ -14,6 +12,6 @@
     };
 
     protected override RenderFragment RenderMonthView =>
-        @<TotalMonthView Color="@Color" CurrentDay="@CurrentDay" HighlightToday="@HighlightToday" CellClicked="CellClicked" MinCellHeight="MonthMinHeight" CellTemplate="@(MonthTemplate ?? CellTemplate)" Items="@Items" Values="@Values"/>;
+        @<TotalMonthView Color="@Color" CurrentDay="@CurrentDay" HighlightToday="@HighlightToday" CellClicked="CellClicked" MinCellHeight="MonthCellMinHeight" CellTemplate="@(MonthTemplate ?? CellTemplate)" Items="@Items" Values="@Values"/>;
 
 }
