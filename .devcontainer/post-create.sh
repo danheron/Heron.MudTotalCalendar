@@ -20,6 +20,7 @@ dotnet restore
 
 ## Restore MudCalendar
 cd /workspaces/Heron.MudCalendar
+git checkout dev
 dotnet restore
 
 ## Restore MudTotalCalendar
