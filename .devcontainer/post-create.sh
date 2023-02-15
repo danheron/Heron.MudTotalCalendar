@@ -2,13 +2,8 @@
 wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
-
 sudo apt update && \
     sudo apt install -y dotnet-sdk-6.0
-
-## Install additional apt packages
-# sudo apt-get update #&& \
-    #sudo apt-get install -y dos2unix libsecret-1-0
 
 ## Configure git
 git config --global core.autocrlf input
@@ -16,8 +11,33 @@ git config --global core.autocrlf input
 ## Enable local HTTPS for .NET
 dotnet dev-certs https --trust
 
-## Restore .NET packages and build the default solution
-# dotnet restore && dotnet build
+# Clone and checkout MudBlazor mudcalendar branch and restore
+gh repo clone danheron/MudBlazor /workspaces/MudBlazor
+cd /workspaces/MudBlazor
+git checkout mudcalendar
+cd src
+dotnet restore
+
+## Restore MudCalendar
+cd /workspaces/Heron.MudCalendar
+dotnet restore
+
+## Restore MudTotalCalendar
+cd /workspaces/Heron.MudTotalCalendar
+dotnet restore
+
+# Build debug and release versions of MudCalendar
+dotnet build /workspaces/Heron.MudCalendar/Heron.MudCalendar -c Debug --no-restore
+dotnet build /workspaces/Heron.MudCalendar/Heron.MudCalendar -c Release --no-restore
+
+# Build MudBlazor docs
+dotnet build /workspaces/MudBlazor/src/MudBlazor.Docs -c Release --no-restore
+
+# Build MudCalendar projects
+dotnet build /workspaces/Heron.MudCalendar
+
+# Build MudTotalCalendar projects
+dotnet build /workspaces/Heron.MudTotalCalendar
 
 ## AZURE CLI EXTENSIONS ##
 # Uncomment the below to install Azure CLI extensions

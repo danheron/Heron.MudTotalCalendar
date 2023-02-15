@@ -13,6 +13,7 @@
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [
     // ASP.NET Core Web/API App, Blazor App
+    5000, 5001,
     5030, 5031
   ],
 
@@ -52,6 +53,12 @@
             "contents": "write",
             "pull_requests": "write"
           }
+        },
+        "danheron/MudBlazor": {
+          "permissions": {
+            "contents": "write",
+            "pull_requests": "write"
+          }
         }
       }
     },
@@ -61,7 +68,6 @@
       // Add the IDs of extensions you want installed when the container is created.
       "extensions": [
         "ms-dotnettools.csharp",
-        "ms-dotnettools.blazorwasm-companion",
         "fernandoescolar.vscode-solution-explorer",
         "VisualStudioExptTeam.vscodeintellicode"
       ],
