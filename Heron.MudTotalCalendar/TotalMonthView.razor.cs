@@ -73,8 +73,8 @@ public partial class TotalMonthView : MonthView
 
                 totalWeek.AddValues(cell.Values);
 
-                // TODO: Handle cultures where week starts on Sunday
-                if (date.DayOfWeek == DayOfWeek.Sunday)
+                // If last day of week then add the week total
+                if (CalendarDateRange.GetDayOfWeek(date) == 6)
                 {
                     cells.Add(totalWeek);
                     totalWeek = new TotalCell { WeekTotal = true };
