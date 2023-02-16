@@ -44,11 +44,12 @@ public partial class TotalMonthView : MonthView
 
     protected override List<CalendarCell> BuildCells()
     {
+        // TODO: This is a copy of the MonthView.BuildCells() method.  It needs to be refactored to avoid the duplication.
         var cells = new List<CalendarCell>();
-        var monthStart = new DateTime(CurrentDay.Year, CurrentDay.Month, 1);
+        var monthStart = new DateTime(Calendar.CurrentDay.Year, Calendar.CurrentDay.Month, 1);
         var monthEnd = monthStart.AddMonths(1).AddDays(-1);
 
-        var range = new CalendarDateRange(CurrentDay, CalendarView.Month);
+        var range = new CalendarDateRange(Calendar.CurrentDay, CalendarView.Month);
         var totalMonth = new TotalCell { MonthTotal = true };
         if (range.Start != null && range.End != null)
         {
@@ -61,7 +62,7 @@ public partial class TotalMonthView : MonthView
                 cells.Add(cell);
                 cell.AddValues(Values.Where(v => v.Date == date).ToList());
                 if (date.Date == DateTime.Today) cell.Today = true;
-                cell.Items = Items.Where(i => i.Start >= date && i.Start < date.AddDays(1)).ToList();
+                cell.Items = Calendar.Items.Where(i => i.Start >= date && i.Start < date.AddDays(1)).ToList();
                 if (date < monthStart || date > monthEnd)
                 {
                     cell.Outside = true;
