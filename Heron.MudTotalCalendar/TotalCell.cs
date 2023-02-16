@@ -10,6 +10,18 @@ public class TotalCell : CalendarCell
     
     public bool MonthTotal { get; set; }
 
+    public TotalCell()
+    {
+    }
+
+    public TotalCell(CalendarCell cell)
+    {
+        Date = cell.Date;
+        Items = cell.Items;
+        Outside = cell.Outside;
+        Today = cell.Today;
+    }
+
     public void AddValues(List<Value> values)
     {
         foreach (var value in values)
