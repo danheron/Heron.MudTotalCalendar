@@ -19,6 +19,7 @@ cd src
 dotnet restore
 
 ## Restore MudCalendar
+gh repo clone danheron/Heron.MudCalendar /workspaces/Heron.MudCalendar
 cd /workspaces/Heron.MudCalendar
 git checkout dev
 dotnet restore
