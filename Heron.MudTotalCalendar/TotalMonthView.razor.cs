@@ -7,9 +7,11 @@ namespace Heron.MudTotalCalendar;
 
 public partial class TotalMonthView : MonthView
 {
-    [Parameter]
-    public List<Value> Values { get; set; } = new();
-
+    /// <summary>
+    /// Classes added to the display of the total.
+    /// </summary>
+    /// <param name="definition"></param>
+    /// <returns></returns>
     protected virtual string GetTotalClassname(ValueDefinition definition)
     {
         return new CssBuilder("mud-cal-total")
@@ -17,11 +19,21 @@ public partial class TotalMonthView : MonthView
             .Build();
     }
 
+    /// <summary>
+    /// Styles added to the display of the total.
+    /// </summary>
+    /// <param name="definition"></param>
+    /// <returns></returns>
     protected virtual string GetTotalStyle(ValueDefinition definition)
     {
         return definition.Style;
     }
 
+    /// <summary>
+    /// Format the value to a string including units.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
     protected virtual string FormatValue(Value value)
     {
         var sb = new StringBuilder();
@@ -45,6 +57,7 @@ public partial class TotalMonthView : MonthView
     protected override List<CalendarCell> BuildCells()
     {
         var cells = base.BuildCells();
+        var values = ((MudTotalCalendar)Calendar).Values;
 
         var totalMonth = new TotalCell { MonthTotal = true };
         var totalWeek = new TotalCell { WeekTotal = true };
@@ -54,7 +67,7 @@ public partial class TotalMonthView : MonthView
             // Convert CalendarCell to TotalCell
             var totalCell = new TotalCell(cell);
             totalCells.Add(totalCell);
-            totalCell.AddValues(Values.Where(v => v.Date == totalCell.Date).ToList());
+            totalCell.AddValues(values.Where(v => v.Date == totalCell.Date).ToList());
             
             // Add to week and month totals
             if (!totalCell.Outside) totalMonth.AddValues(totalCell.Values);

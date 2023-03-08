@@ -4,6 +4,9 @@ namespace Heron.MudTotalCalendar;
 
 public partial class MudTotalCalendar : MudCalendar.MudCalendar
 {
+    /// <summary>
+    /// The data used to calculate the totals to be displayed in the calendar.
+    /// </summary>
     [Parameter]
     public List<Value> Values { get; set; } = new();
     
