@@ -1,3 +1,4 @@
+using Heron.MudCalendar.Attributes;
 using Microsoft.AspNetCore.Components;
 
 namespace Heron.MudTotalCalendar;
@@ -8,7 +9,29 @@ public partial class MudTotalCalendar : MudCalendar.MudCalendar
     /// The data used to calculate the totals to be displayed in the calendar.
     /// </summary>
     [Parameter]
+    [Category(CategoryTypes.Calendar.Behavior)]
     public List<Value> Values { get; set; } = new();
+
+    /// <summary>
+    /// If true the totals for each day are shown.
+    /// </summary>
+    [Parameter]
+    [Category(CategoryTypes.Calendar.Behavior)]
+    public bool ShowDayTotal { get; set; } = true;
+
+    /// <summary>
+    /// If true the totals for each week are shown.
+    /// </summary>
+    [Parameter]
+    [Category(CategoryTypes.Calendar.Behavior)]
+    public bool ShowWeekTotal { get; set; } = true;
+
+    /// <summary>
+    /// If true the totals for each month are shown.
+    /// </summary>
+    [Parameter]
+    [Category(CategoryTypes.Calendar.Behavior)]
+    public bool ShowMonthTotal { get; set; } = true;
     
     protected override void OnInitialized()
     {

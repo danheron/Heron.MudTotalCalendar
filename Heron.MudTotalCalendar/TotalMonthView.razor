@@ -12,22 +12,28 @@
                     @Cells[i].Date.ToString("ddd")
                 </th>
             }
-            <th>Total</th>
+            @if (ShowTotalColumn)
+            {
+                <th>Total</th>
+            }
         </tr>;
 
     protected override RenderFragment RenderBody => __builder =>
     {
-        for (var week = 0; week < Cells.Count / 8; week++)
+        for (var week = 0; week < Cells.Count / ColumnCount; week++)
         {
             <tr style="@RowStyle">
-                @for (var i = week * 8; i < (week + 1) * 8; i++)
+                @for (var i = week * ColumnCount; i < (week + 1) * ColumnCount; i++)
                 {
                     var cell = Cells[i];
                     @RenderCell(cell)
                 }
             </tr>
         }
-        RenderMonthTotalRow(__builder);
+        if (TotalCalendar.ShowMonthTotal)
+        {
+            RenderMonthTotalRow(__builder);   
+        }
     };
     
     protected override RenderFragment RenderCell(CalendarCell cell) =>
@@ -51,7 +57,7 @@
     /// </summary>
     protected virtual RenderFragment RenderMonthTotalRow =>
         @<tr>
-            @for (var i = 0; i < 7; i++)
+            @for (var i = 0; i < ColumnCount - 1; i++)
             {
                 <td></td>
             }
@@ -64,9 +70,12 @@
     protected virtual RenderFragment RenderDayTotalCell(CalendarCell cell) =>
         @<div class="mud-cal-month-cell" style="@DayStyle(cell)">
             @RenderCellDayNumber(cell)
-            @foreach (var value in ((TotalCell)cell).Values)
+            @if (TotalCalendar.ShowDayTotal)
             {
-                @RenderTotal(value)
+                foreach (var value in ((TotalCell)cell).Values)
+                {
+                    @RenderTotal(value)
+                }
             }
             @RenderCellContents(cell)
         </div>;

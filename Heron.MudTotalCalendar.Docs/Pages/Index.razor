@@ -1,0 +1,56 @@
+﻿@page "/"
+
+<DocsPage>
+    <DocsPageHeader Title="MudTotalCalendar" SubTitle="A calendar component for displaying numerical data with totals."/>
+
+    <DocsPageContent>
+
+        <DocsPageSection>
+            <MudTotalCalendar Values="BuildTestData()" />
+        </DocsPageSection>
+
+        <DocsPageSection>
+            <SectionHeader Title="Getting Started">
+                <Description>
+                    <p class="my-4">
+                        MudTotalCalendar relies on MudBlazor. Follow the installation instructions for
+                        <MudLink Href="https://mudblazor.com/getting-started/installation" Target="_blank">
+                            <b>MudBlazor</b>
+                        </MudLink>.
+                    </p>
+                    <p class="my-4">
+                        Once your project is setup with MudBlazor you can install the MudTotalCalendar package.
+                    </p>
+                    <div class="docs-section-source my-4">
+                        <div class="mud-codeblock">
+                            dotnet add package Heron.MudTotalCalendar
+                        </div>
+                    </div>
+                    <p class="my-4">
+                        Add the following to <CodeInline>_Imports.razor</CodeInline>
+                    </p>
+                    <div class="docs-section-source my-4">
+                        <div class="mud-codeblock">
+                            <div class="html">
+                                @@using Heron.MudTotalCalendar
+                            </div>
+                        </div>
+                    </div>
+                    <p class="my-4">
+                        Add the MudTotalCalendar component to your razor page/component.
+                    </p>
+                    <div class="docs-section-source my-4">
+                        <div class="mud-codeblock">
+                            <div class="html">
+                                <span class="htmlTagDelimiter">&lt;</span>
+                                <span class="htmlElementName">MudTotalCalendar</span>
+                                <span class="htmlTagDelimiter">/&gt;</span>
+                            </div>
+                        </div>
+                    </div>
+                </Description>
+            </SectionHeader>
+        </DocsPageSection>
+
+    </DocsPageContent>
+</DocsPage>

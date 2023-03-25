@@ -1,0 +1,46 @@
+@page "/totalcalendar"
+
+<DocsPage>
+    <DocsPageHeader Title="TotalCalendar" SubTitle="A calendar component that can display numeric values and totals"/>
+    <DocsPageContent>
+
+        <DocsPageSection>
+            <SectionHeader Title="Simple">
+                <Description>
+                    <p>
+                        The first step for displaying values is to create <CodeInline>ValueDefinition</CodeInline>s for the data to be displayed. The definition includes the name of the value,
+                        the units are formatting options.
+                    </p>
+                    <p class="mt-2">
+                        Then create a list of <CodeInline>Value</CodeInline>s that contain the data to be displayed.
+                    </p>
+                </Description>
+            </SectionHeader>
+            <SectionContent DarkenBackground="true" Code="SimpleTotalCalendarExample" ShowCode="false" Block="true" FullWidth="true" Assembly="typeof(TotalCalendarPage).Assembly" AllowRunCode="false">
+                <SimpleTotalCalendarExample/>
+            </SectionContent>
+        </DocsPageSection>
+
+        <DocsPageSection>
+            <SectionHeader Title="Formatting">
+                <Description>
+                    The values can be formatted by passing a format string into the <CodeInline>FormatString</CodeInline> property or a function into the <CodeInline>FormatFunc</CodeInline> property.
+                </Description>
+            </SectionHeader>
+            <SectionContent DarkenBackground="true" Code="SimpleTotalCalendarExample" ShowCode="false" Block="true" FullWidth="true" Assembly="typeof(TotalCalendarPage).Assembly" AllowRunCode="false">
+                <FormatTotalCalendarExample/>
+            </SectionContent>
+        </DocsPageSection>
+
+        <DocsPageSection>
+            <SectionHeader Title="Options">
+                <Description>
+                    The visibility of the totals can be changed with the <CodeInline>ShowDayTotal</CodeInline>, <CodeInline>ShowWeekTotal</CodeInline> and <CodeInline>ShowMonthTotal</CodeInline> properties.
+                </Description>
+            </SectionHeader>
+            <SectionContent DarkenBackground="true" Code="SimpleTotalCalendarExample" ShowCode="false" Block="true" FullWidth="true" Assembly="typeof(TotalCalendarPage).Assembly" AllowRunCode="false">
+                <OptionsTotalCalendarExample/>
+            </SectionContent>
+        </DocsPageSection>
+    </DocsPageContent>
+</DocsPage>

@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>disable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<LangVersion>11</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Blazor-Analytics" Version="3.11.0" />
+		<PackageReference Include="Blazored.LocalStorage" Version="4.3.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.1" PrivateAssets="all" />
+		<PackageReference Include="MudBlazor" Version="6.1.9" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Heron.MudTotalCalendar\Heron.MudTotalCalendar.csproj" />
+	</ItemGroup>
+
+	<!--Update ExampleCode-->
+	<ItemGroup>
+		<EmbeddedResource Include="Pages\**\*.html" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="MudBlazor.Docs">
+			<HintPath>..\..\MudBlazor\src\MudBlazor.Docs\bin\Release\net7.0\MudBlazor.Docs.dll</HintPath>
+		</Reference>
+		<Reference Include="MudBlazor.Examples.Data">
+			<HintPath>..\..\MudBlazor\src\MudBlazor.Docs\bin\Release\net7.0\MudBlazor.Examples.Data.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Pages\TotalCalendar\Code" />
+	  <Folder Include="Services" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="wwwroot\sample-data\weather.json" />
+	</ItemGroup>
+	
+</Project>

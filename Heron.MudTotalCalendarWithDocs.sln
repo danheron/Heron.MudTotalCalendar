@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heron.MudTotalCalendar.Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heron.MudTotalCalendar.UnitTests", "Heron.MudTotalCalendar.UnitTests\Heron.MudTotalCalendar.UnitTests.csproj", "{CACE2739-0FD0-4729-A572-893688E94406}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heron.MudTotalCalendar.Docs", "Heron.MudTotalCalendar.Docs\Heron.MudTotalCalendar.Docs.csproj", "{8B7A2A96-DE71-4FB6-A19F-76040CF52A8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{CACE2739-0FD0-4729-A572-893688E94406}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CACE2739-0FD0-4729-A572-893688E94406}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CACE2739-0FD0-4729-A572-893688E94406}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B7A2A96-DE71-4FB6-A19F-76040CF52A8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B7A2A96-DE71-4FB6-A19F-76040CF52A8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B7A2A96-DE71-4FB6-A19F-76040CF52A8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B7A2A96-DE71-4FB6-A19F-76040CF52A8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

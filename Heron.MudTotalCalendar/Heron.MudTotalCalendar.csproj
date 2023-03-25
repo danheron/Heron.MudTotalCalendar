@@ -12,16 +12,13 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Heron.MudCalendar" Version="1.0.3" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.1" />
         <PackageReference Include="MudBlazor" Version="6.1.9" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="wwwroot" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\..\Heron.MudCalendar\Heron.MudCalendar\Heron.MudCalendar.csproj" />
     </ItemGroup>
 
     <Target Name="ToolRestore">

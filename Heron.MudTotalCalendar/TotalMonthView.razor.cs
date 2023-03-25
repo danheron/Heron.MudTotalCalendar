@@ -7,6 +7,12 @@ namespace Heron.MudTotalCalendar;
 
 public partial class TotalMonthView : MonthView
 {
+    private MudTotalCalendar TotalCalendar => (MudTotalCalendar)Calendar;
+
+    private bool ShowTotalColumn => TotalCalendar.ShowWeekTotal;
+
+    private int ColumnCount => ShowTotalColumn ? 8 : 7;
+    
     /// <summary>
     /// Classes added to the display of the total.
     /// </summary>
@@ -43,7 +49,9 @@ public partial class TotalMonthView : MonthView
             sb.Append(' ');
         }
 
-        sb.Append(value.Amount.ToString(value.Definition.FormatString));
+        sb.Append(value.Definition.FormatFunc == null
+            ? value.Amount.ToString(value.Definition.FormatString)
+            : value.Definition.FormatFunc(value.Amount));
 
         if (!value.Definition.PrefixUnits)
         {
@@ -57,7 +65,7 @@ public partial class TotalMonthView : MonthView
     protected override List<CalendarCell> BuildCells()
     {
         var cells = base.BuildCells();
-        var values = ((MudTotalCalendar)Calendar).Values;
+        var values = TotalCalendar.Values;
 
         var totalMonth = new TotalCell { MonthTotal = true };
         var totalWeek = new TotalCell { WeekTotal = true };
@@ -74,14 +82,17 @@ public partial class TotalMonthView : MonthView
             totalWeek.AddValues(totalCell.Values);
 
             // If last day of week then add the week total
-            if (CalendarDateRange.GetDayOfWeek(totalCell.Date) == 6)
+            if (CalendarDateRange.GetDayOfWeek(totalCell.Date) == 6 && ShowTotalColumn)
             {
-                totalCells.Add(totalWeek);
+                totalCells.Add(TotalCalendar.ShowWeekTotal ? totalWeek : new TotalCell());
                 totalWeek = new TotalCell { WeekTotal = true };
             }
         }
 
-        totalCells.Add(totalMonth);
+        if (TotalCalendar.ShowMonthTotal)
+        {
+            totalCells.Add(totalMonth);
+        }
 
         return totalCells;
     }
