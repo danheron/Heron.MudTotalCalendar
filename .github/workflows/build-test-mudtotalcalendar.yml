@@ -1,0 +1,44 @@
+name: build-test-mudtotalcalendar
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ dev ]
+
+jobs:
+  build-test:
+    name: Build and test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '6.0.x', '7.0.x' ]
+
+    steps:
+      - name: Checkout MudTotalCalendar repository
+        uses: actions/checkout@v3
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      - name: Restore
+        run: dotnet restore Heron.MudTotalCalendar.sln
+
+      - name: Build MudTotalCalendar
+        run: dotnet build -c Release --no-restore
+        working-directory: ./Heron.MudTotalCalendar
+
+      - name: Build Unit Tests
+        run: dotnet build -c Release --no-restore
+        working-directory: ./Heron.MudTotalCalendar.UnitTests
+
+      - name: Test
+        run: dotnet test -c Release --no-build --no-restore --blame-hang --blame-hang-timeout 60s /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:ExcludeByAttribute='ExcludeFromCodeCoverageAttribute' /p:Include='[Heron.MudTotalCalendar]*' /p:CoverletOutput='./TestResults/' --logger trx --results-directory "TestResults-${{ matrix.dotnet-version }}"
+        working-directory: ./Heron.MudTotalCalendar.UnitTests
+
+#      - name: Publish coverage
+#        uses: codecov/codecov-action@v3
+#        with:
+#          token: ${{ secrets.CODECOV_TOKEN }}
+#          file: coverage.cobertura.xml

@@ -1,24 +1,52 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <PackageId>Heron.MudTotalCalendar</PackageId>
+        <Authors>Dan Heron</Authors>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <Copyright>Copyright 2023 Dan Heron</Copyright>
+        <PackageTags>Calendar, Blazor, MudBlazor, Components, Blazor Components, Blazor Library</PackageTags>
+        <Description>A calendar component for displaying numerical data with totals.</Description>
+        <PackageProjectUrl>https://danheron.github.io/Heron.MudTotalCalendar</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/danheron/Heron.MudTotalCalendar</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <DocumentationFile>bin\Debug\net6.0\Heron.MudTotalCalendar.xml</DocumentationFile>
+        <NoWarn>1701;1702;IL2121;1591</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\LICENSE" Pack="true" Visible="false" PackagePath="" />
+    </ItemGroup>
 
     <ItemGroup>
         <SupportedPlatform Include="browser" />
     </ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Heron.MudCalendar" Version="1.0.3" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.1" />
-        <PackageReference Include="MudBlazor" Version="6.1.9" />
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.11" />
     </ItemGroup>
 
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.1" />
+    </ItemGroup>
+    
     <ItemGroup>
-      <Folder Include="wwwroot" />
+        <PackageReference Include="Heron.MudCalendar" Version="1.0.3" />
+        <PackageReference Include="MudBlazor" Version="6.1.9" />
     </ItemGroup>
 
     <Target Name="ToolRestore">
