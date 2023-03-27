@@ -85,6 +85,10 @@ jobs:
       run: dotnet build -c Release --no-restore
       working-directory: './Heron.MudTotalCalendar/Heron.MudTotalCalendar'
 
+    - name: Build MudCalendar (Release)
+      run: dotnet build -c Release --no-restore
+      working-directory: './Heron.MudCalendar/Heron.MudCalendar'
+
     - name: Build MudBlazor Docs
       run: dotnet build -c Release --no-restore
       working-directory: './MudBlazor/src/MudBlazor.Docs'
