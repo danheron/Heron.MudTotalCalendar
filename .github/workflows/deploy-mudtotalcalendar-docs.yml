@@ -42,7 +42,14 @@ jobs:
         ref: mudtotalcalendar
         path: './MudBlazor'
 
-    - name: Checkout mudtotalcalendar
+    - name: Checkout MudTotalCalendar
+      uses: actions/checkout@v3
+      with:
+        repository: danheron/Heron.MudCalendar
+        ref: main
+        path: './Heron.MudCalendar'
+
+    - name: Checkout MudTotalCalendar
       uses: actions/checkout@v3
       with:
         ref: 'refs/tags/v${{ needs.get-version.outputs.VERSION }}'
@@ -57,6 +64,10 @@ jobs:
       run: dotnet restore
       working-directory: './MudBlazor/src'
 
+    - name: Restore MudCalendar
+      run: dotnet restore
+      working-directory: './Heron.MudCalendar'
+
     - name: Restore MudTotalCalendar
       run: dotnet restore Heron.MudTotalCalendarWithDocs.sln
       working-directory: './Heron.MudTotalCalendar'
@@ -65,6 +76,10 @@ jobs:
     - name: Build MudTotalCalendar (Debug)
       run: dotnet build -c Debug --no-restore
       working-directory: './Heron.MudTotalCalendar/Heron.MudTotalCalendar'
+
+    - name: Build MudCalendar (Debug)
+      run: dotnet build -c Debug --no-restore
+      working-directory: './Heron.MudCalendar/Heron.MudCalendar'
 
     - name: Build MudTotalCalendar (Release)
       run: dotnet build -c Release --no-restore
