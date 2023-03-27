@@ -1,4 +1,9 @@
 # MudTotalCalendar
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/danheron/Heron.MudTotalCalendar/build-test-mudtotalcalendar.yml?branch=dev&logo=github&style=flat-square)
+![Codecov](https://img.shields.io/codecov/c/github/danheron/Heron.MudTotalCalendar?logo=codecov&logoColor=white&style=flat-square&token=EP53WKLLLX)
+[![GitHub](https://img.shields.io/github/license/danheron/Heron.MudTotalCalendar?color=594ae2&logo=github&style=flat-square)](https://github.com/danheron/Heron.MudTotalCalendar/blob/master/LICENSE)
+[![GitHub last commit](https://img.shields.io/github/last-commit/danheron/Heron.MudTotalCalendar?color=594ae2&style=flat-square&logo=github)](https://github.com/danheron/Heron.MudTotalCalendar)
+[![Nuget version](https://img.shields.io/nuget/v/Heron.MudTotalCalendar?color=ff4081&label=nuget%20version&logo=nuget&style=flat-square)](https://www.nuget.org/packages/Heron.MudTotalCalendar/)
 
 A calendar component for displaying numerical data with totals.
 
