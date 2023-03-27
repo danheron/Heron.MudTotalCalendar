@@ -20,10 +20,10 @@ jobs:
     outputs:
       VERSION: ${{ steps.output-version.outputs.VERSION }}
     steps:
-      - name: Set tag from input
-        env:
-          TAG: ${{ github.event.inputs.version }}
-        run: echo "VERSION=${TAG#v}" >> $GITHUB_ENV
+    - name: Set tag from input
+      env:
+        TAG: ${{ github.event.inputs.version }}
+      run: echo "VERSION=${TAG#v}" >> $GITHUB_ENV
 
     - name: VERSION to job output
       id: output-version
@@ -35,12 +35,12 @@ jobs:
     needs: get-version
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout MudBlazor
-        uses: actions/checkout@v3
-        with:
-          repository: danheron/MudBlazor
-          ref: mudtotalcalendar
-          path: './MudBlazor'
+    - name: Checkout MudBlazor
+      uses: actions/checkout@v3
+      with:
+        repository: danheron/MudBlazor
+        ref: mudtotalcalendar
+        path: './MudBlazor'
 
     - name: Checkout mudtotalcalendar
       uses: actions/checkout@v3
