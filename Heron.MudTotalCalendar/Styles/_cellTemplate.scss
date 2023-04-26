@@ -1,0 +1,16 @@
+.mud-cal-total {
+  display: grid;
+  grid-template-columns: 1fr min-content;
+  padding: 4px;
+}
+
+.mud-cal-total-name {
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.mud-cal-total-value {
+  text-align: right;
+  white-space: nowrap;
+}

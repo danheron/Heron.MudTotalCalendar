@@ -109,8 +109,7 @@
     /// </summary>
     protected virtual RenderFragment RenderTotal(Value value) =>
         @<div class="@GetTotalClassname(value.Definition)" style="@GetTotalStyle(value.Definition)">
-            <div class="mud-cal-total-name">@value.Definition.Name</div>
-            <div class="mud-cal-total-value">@FormatValue(value)</div>
+            @TotalCalendar.TotalTemplate.Invoke(value)
         </div>;
 
 }
