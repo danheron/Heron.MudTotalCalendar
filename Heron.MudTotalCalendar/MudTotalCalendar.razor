@@ -1,9 +1,22 @@
 @inherits MudCalendar
 @using Microsoft.AspNetCore.Components.Rendering
+@using CategoryTypes = Heron.MudCalendar.Attributes.CategoryTypes
 
 @Render
 
 @code {
+
+    /// <summary>
+    /// Defines the content for the total cell.
+    /// </summary>
+    [Category(CategoryTypes.Calendar.Template)]
+    [Parameter]
+    public RenderFragment<Value> TotalTemplate { get; set; } =
+        value =>
+            @<div class="mud-cal-total">
+                <div class="mud-cal-total-name">@value.Definition.Name</div>
+                <div class="mud-cal-total-value">@ValueDefinition.FormatValue(value)</div>
+            </div>;
 
     protected override RenderFragment RenderHeaderContent => __builder =>
     {

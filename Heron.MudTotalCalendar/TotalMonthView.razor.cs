@@ -20,9 +20,7 @@ public partial class TotalMonthView : MonthView
     /// <returns></returns>
     protected virtual string GetTotalClassname(ValueDefinition definition)
     {
-        return new CssBuilder("mud-cal-total")
-            .AddClass(definition.Class)
-            .Build();
+        return definition.Class;
     }
 
     /// <summary>
@@ -33,33 +31,6 @@ public partial class TotalMonthView : MonthView
     protected virtual string GetTotalStyle(ValueDefinition definition)
     {
         return definition.Style;
-    }
-
-    /// <summary>
-    /// Format the value to a string including units.
-    /// </summary>
-    /// <param name="value"></param>
-    /// <returns></returns>
-    protected virtual string FormatValue(Value value)
-    {
-        var sb = new StringBuilder();
-        if (value.Definition.PrefixUnits)
-        {
-            sb.Append(value.Definition.Units);
-            sb.Append(' ');
-        }
-
-        sb.Append(value.Definition.FormatFunc == null
-            ? value.Amount.ToString(value.Definition.FormatString)
-            : value.Definition.FormatFunc(value.Amount));
-
-        if (!value.Definition.PrefixUnits)
-        {
-            sb.Append(' ');
-            sb.Append(value.Definition.Units);
-        }
-
-        return sb.ToString();
     }
 
     protected override List<CalendarCell> BuildCells()
