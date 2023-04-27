@@ -25,7 +25,7 @@ public class TotalCalendarTests : BunitTest
         
         comp.SetParam(x => x.CurrentDay, new DateTime(2023, 2, 1));
 
-        comp.FindAll("div.mud-cal-month-view div.mud-cal-month-cell")[8].ClassList
+        comp.FindAll("div.mud-cal-month-view div.mud-cal-month-cell")[7].ClassList
             .Contains("mud-cal-total-cell").Should().BeTrue();
     }
 }
