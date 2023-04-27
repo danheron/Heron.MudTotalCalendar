@@ -36,6 +36,19 @@
         <SupportedPlatform Include="browser" />
     </ItemGroup>
 
+    <Target Name="ShouldCleanGeneratedFiles" BeforeTargets="BeforeRebuild">
+        <PropertyGroup>
+            <CleanGeneratedFiles>false</CleanGeneratedFiles>
+        </PropertyGroup>
+    </Target>
+
+    <Target Name="CleanGeneratedFiles" BeforeTargets="Clean" Condition="'$(CleanGeneratedFiles)' != 'false'">
+        <ItemGroup>
+            <FilesToClean Include="./wwwroot/Heron.MudTotalCalendar.min.css" />
+        </ItemGroup>
+        <Delete Files="@(FilesToClean)" />
+    </Target>
+
     <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.11" />
     </ItemGroup>
@@ -58,12 +71,19 @@
         <Exec Command="dotnet webcompiler ./Styles/Heron.MudTotalCalendar.scss -c excubowebcompiler.json" StandardOutputImportance="high" StandardErrorImportance="high" />
     </Target>
 
-    <Target Name="IncludeGeneratedStaticFiles" DependsOnTargets="WebCompiler">
+    <Target Name="IncludeGeneratedStaticFiles" DependsOnTargets="WebCompiler" BeforeTargets="BeforeBuild">
         <Error Condition="!Exists('wwwroot/Heron.MudTotalCalendar.min.css')" Text="Missing Heron.MudTotalCalendar.min.css in wwwroot" />
         <ItemGroup>
-            <Content Include="wwwroot/Heron.MudTotalCalendar.min.css" />
+            <!--Include without duplication-->
+            <_NewCompiledCssFiles Include="wwwroot/Heron.MudTotalCalendar.min.css" Exclude="@(Content)" />
+            <Content Include="@(_NewCompiledCssFiles)" />
         </ItemGroup>
     </Target>
+
+    <ItemGroup>
+        <Content Remove="excubowebcompiler.json" />
+        <Content Remove="**/*/.DS_Store" />
+    </ItemGroup>
 
     <ItemGroup>
         <!--For automatic compile on save of the scss use

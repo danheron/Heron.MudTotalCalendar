@@ -1,0 +1,93 @@
+@using Heron.MudCalendar
+@using AlignItems = MudBlazor.Docs.Pages.CSS_Utilities.Flexbox.AlignItems
+@namespace Heron.MudTotalCalendar.Docs.Examples
+
+<MudTotalCalendar Values="BuildTotals()" Items="_items" ShowDayTotal="false">
+    <CellTemplate>
+        <div style="border: 1px solid var(--mud-palette-tertiary-darken); color: var(--mud-palette-tertiary-darken); background-color: var(--mud-palette-tertiary-hover)" class="pa-1 ma-1">
+            <div style="text-align: center;">
+                @context.Text
+            </div>
+            <div style="display: flex; justify-content: space-around; width: 100%;">
+                <div>@(((RunItem)context).Time.ToString(@"h\:mm\:ss"))</div>
+                <div>@(((RunItem)context).Distance) km</div>
+            </div>
+        </div>
+    </CellTemplate>
+    <TotalTemplate>
+        <div class="mx-2">
+            <div style="display: inline;">@(context.Definition.FormatFunc == null
+                ? context.Amount.ToString(context.Definition.FormatString)
+                : context.Definition.FormatFunc(context.Amount))</div>
+            <div style="display: inline; font-size: 12px;">@context.Definition.Units</div>
+        </div>
+    </TotalTemplate>
+</MudTotalCalendar>
+
+@code {
+
+    private List<RunItem> _items = new()
+    {
+        new RunItem
+        {
+            Start = DateTime.Today,
+            Text = "Morning Run",
+            Time = new TimeSpan(1, 12, 34),
+            Distance = 12.3
+        },
+        new RunItem
+        {
+            Start = DateTime.Today.AddDays(-1),
+            Text = "Afternoon Run",
+            Time = new TimeSpan(0, 42, 23),
+            Distance = 9.6
+        },
+        new RunItem
+        {
+            Start = DateTime.Today.AddDays(-2),
+            Text = "Morning Run",
+            Time = new TimeSpan(0, 35, 11),
+            Distance = 7.2
+        },
+        new RunItem
+        {
+            Start = DateTime.Today.AddDays(-2),
+            Text = "Afternoon Run",
+            Time = new TimeSpan(0, 53, 21),
+            Distance = 8.6
+        }
+    };
+    
+    private List<Value> BuildTotals()
+    {
+        var time = new ValueDefinition
+        {
+            Name = "Time",
+            Units = "hours",
+            FormatFunc = seconds => TimeSpan.FromSeconds(seconds).ToString(@"h\:mm"),
+        };
+        var distance = new ValueDefinition
+        {
+            Name = "Distance",
+            Units = "km",
+            FormatString = "N1",
+        };
+
+        var totals = new List<Value>();
+        for (var i = 0; i <= 2; i++)
+        {
+            var items = _items.Where(x => x.Start == DateTime.Today).ToList();
+            totals.Add(new Value { Date = DateTime.Today.AddDays(i * -1), Definition = time, Amount = items.Sum(x => x.Time.TotalSeconds) });
+            totals.Add(new Value { Date = DateTime.Today.AddDays(i * -1), Definition = distance, Amount = items.Sum(x => x.Distance) });
+        }
+
+        return totals;
+    }
+
+    private class RunItem : CalendarItem
+    {
+        public double Distance { get; set; }
+        public TimeSpan Time { get; set; }
+    }
+
+}
