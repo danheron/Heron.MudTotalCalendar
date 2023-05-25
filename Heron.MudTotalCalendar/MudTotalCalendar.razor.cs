@@ -33,10 +33,8 @@ public partial class MudTotalCalendar : MudCalendar.MudCalendar
     [Category(CategoryTypes.Calendar.Behavior)]
     public bool ShowMonthTotal { get; set; } = true;
     
-    protected override void OnInitialized()
+    public MudTotalCalendar()
     {
-        base.OnInitialized();
-
         // Default to not showing the week and day views because they don't have totals.
         ShowWeek = false;
         ShowDay = false;
