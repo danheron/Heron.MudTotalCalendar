@@ -1,0 +1,13 @@
+<MudTotalCalendar CellClicked="TestClick" ShowDay="true" ShowWeek="true" ShowWeekTotal="false" ShowMonthTotal="true" />
+<MudTextField @bind-Value="_value" />
+
+@code {
+    public static string __description__ = "Cell Click Test";
+
+    private string _value = string.Empty;
+
+    private void TestClick(DateTime dateTime)
+    {
+        _value = dateTime.Day.ToString();
+    }
+}
