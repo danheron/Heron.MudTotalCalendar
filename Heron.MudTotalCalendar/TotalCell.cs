@@ -29,7 +29,7 @@ public class TotalCell : CalendarCell
             var currentValue = Values.SingleOrDefault(v => v.Definition.Name == value.Definition.Name);
             if (currentValue == null)
             {
-                currentValue = new Value { Definition = value.Definition };
+                currentValue = new Value { Definition = value.Definition, Date = value.Date };
                 Values.Add(currentValue);
             }
 
