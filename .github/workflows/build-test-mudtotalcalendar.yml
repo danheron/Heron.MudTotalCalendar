@@ -26,7 +26,7 @@ jobs:
         run: dotnet restore Heron.MudTotalCalendar.sln
 
       - name: Build MudTotalCalendar
-        run: dotnet build -c Release --no-restore
+        run: dotnet build -c Release -m:1 --no-restore
         working-directory: ./Heron.MudTotalCalendar
 
       - name: Build Unit Tests
