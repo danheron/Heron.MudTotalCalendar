@@ -1,7 +1,4 @@
-using System.Text;
 using Heron.MudCalendar;
-using Microsoft.AspNetCore.Components;
-using MudBlazor.Utilities;
 
 namespace Heron.MudTotalCalendar;
 
@@ -10,9 +7,9 @@ public partial class TotalMonthView : MonthView
     private MudTotalCalendar TotalCalendar => (MudTotalCalendar)Calendar;
 
     private bool ShowTotalColumn => TotalCalendar.ShowWeekTotal;
-
-    private int ColumnCount => ShowTotalColumn ? 8 : 7;
     
+    protected override int Columns => ShowTotalColumn ? 8 : 7;
+
     /// <summary>
     /// Classes added to the display of the total.
     /// </summary>

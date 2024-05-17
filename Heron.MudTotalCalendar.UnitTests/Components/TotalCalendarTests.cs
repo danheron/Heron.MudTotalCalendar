@@ -1,4 +1,5 @@
 using System;
+using AngleSharp.Dom;
 using FluentAssertions;
 using Heron.MudCalendar;
 using Heron.MudTotalCalendar.UnitTests.Viewer.TestComponents.TotalCalendar;
@@ -26,8 +27,8 @@ public class TotalCalendarTests : BunitTest
         
         comp.SetParam(x => x.CurrentDay, new DateTime(2023, 2, 1));
 
-        comp.FindAll("div.mud-cal-month-view div.mud-cal-month-cell")[7].ClassList
-            .Contains("mud-cal-total-cell").Should().BeTrue();
+        comp.Find("div.mud-cal-month-view div.mud-cal-month-cell:nth-child(8) div.mud-cal-total-cell").Should()
+            .NotBeNull();
     }
 
     [Test]
