@@ -17,9 +17,9 @@
 </MudTotalCalendar>
 
 <MudToolBar Class="mt-4">
-    <MudSwitch @bind-checked="@_showDayTotal" Color="Color.Primary" T="bool">Day Totals</MudSwitch>
-    <MudSwitch @bind-checked="@_showWeekTotal" Color="Color.Primary" T="bool">Week Totals</MudSwitch>
-    <MudSwitch @bind-checked="@_showMonthTotal" Color="Color.Primary" T="bool">Month Totals</MudSwitch>
+    <MudSwitch @bind-Value="@_showDayTotal" Color="Color.Primary" T="bool">Day Totals</MudSwitch>
+    <MudSwitch @bind-Value="@_showWeekTotal" Color="Color.Primary" T="bool">Week Totals</MudSwitch>
+    <MudSwitch @bind-Value="@_showMonthTotal" Color="Color.Primary" T="bool">Month Totals</MudSwitch>
 </MudToolBar>
 
 @code {
@@ -33,6 +33,7 @@
         new RunItem
         {
             Start = DateTime.Today,
+            End = DateTime.Today.AddHours(6),
             Text = "Morning Run",
             Time = new TimeSpan(1, 12, 34),
             Distance = 12.3
