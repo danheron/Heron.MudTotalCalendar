@@ -56,16 +56,16 @@
     </Target>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.19" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.20" />
     </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.5" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.6" />
     </ItemGroup>
     
     <ItemGroup>
-        <PackageReference Include="Heron.MudCalendar" Version="2.0.0-beta.3" />
-        <PackageReference Include="MudBlazor" Version="7.0.0-preview.3" />
+        <PackageReference Include="Heron.MudCalendar" Version="2.0.0" />
+        <PackageReference Include="MudBlazor" Version="7.0.0" />
     </ItemGroup>
 
     <Target Name="ToolRestore">

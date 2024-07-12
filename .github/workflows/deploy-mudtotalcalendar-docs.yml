@@ -1,6 +1,8 @@
 name: deploy-mudtotalcalendar-docs
 env:
-  PUBLISH_FOLDER: './Heron.MudTotalCalendar/Heron.MudTotalCalendar.Docs/bin/Release/net7.0/publish/wwwroot'
+  PUBLISH_FOLDER: './Heron.MudTotalCalendar/Heron.MudTotalCalendar.Docs/bin/Release/net8.0/publish/wwwroot'
+  MUDCALENDAR_Version: 2.0.0
+  MUDBLAZOR_VERSION: 7.0.0
 
 on:
   workflow_dispatch:
@@ -42,7 +44,7 @@ jobs:
         ref: mudtotalcalendar
         path: './MudBlazor'
 
-    - name: Checkout MudTotalCalendar
+    - name: Checkout MudCalendar
       uses: actions/checkout@v3
       with:
         repository: danheron/Heron.MudCalendar
@@ -78,7 +80,7 @@ jobs:
       working-directory: './Heron.MudTotalCalendar/Heron.MudTotalCalendar'
 
     - name: Build MudCalendar (Debug)
-      run: dotnet build -c Debug -m:1 --no-restore
+      run: dotnet build -c Debug -m:1 --no-restore /p:AssemblyVersion=${{ env.MUDCALENDAR_VERSION }}
       working-directory: './Heron.MudCalendar/Heron.MudCalendar'
 
     - name: Build MudTotalCalendar (Release)
@@ -86,8 +88,12 @@ jobs:
       working-directory: './Heron.MudTotalCalendar/Heron.MudTotalCalendar'
 
     - name: Build MudCalendar (Release)
-      run: dotnet build -c Release -m:1 --no-restore
+      run: dotnet build -c Release -m:1 --no-restore /p:AssemblyVersion=${{ env.MUDCALENDAR_VERSION }}
       working-directory: './Heron.MudCalendar/Heron.MudCalendar'
+
+    - name: Build MudBlazor (Debug)
+      run: dotnet build -c Debug --no-restore /p:AssemblyVersion=${{ env.MUDBLAZOR_VERSION }}
+      working-directory: './MudBlazor/src/MudBlazor'
 
     - name: Build MudBlazor Docs
       run: dotnet build -c Release --no-restore
