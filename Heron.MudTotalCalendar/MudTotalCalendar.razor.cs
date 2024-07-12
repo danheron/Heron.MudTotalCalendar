@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Components;
 
 namespace Heron.MudTotalCalendar;
 
+/// <summary>
+/// Calendar component for displaying numerical data with totals.
+/// </summary>
 public partial class MudTotalCalendar : MudCalendar.MudCalendar
 {
     /// <summary>
@@ -16,6 +19,9 @@ public partial class MudTotalCalendar : MudCalendar.MudCalendar
     /// <summary>
     /// If true the totals for each day are shown.
     /// </summary>
+    /// <remarks>
+    /// Defaults to <c>true</c>.
+    /// </remarks>
     [Parameter]
     [Category(CategoryTypes.Calendar.Behavior)]
     public bool ShowDayTotal { get; set; } = true;
@@ -23,6 +29,9 @@ public partial class MudTotalCalendar : MudCalendar.MudCalendar
     /// <summary>
     /// If true the totals for each week are shown.
     /// </summary>
+    /// <remarks>
+    /// Defaults to <c>true</c>.
+    /// </remarks>
     [Parameter]
     [Category(CategoryTypes.Calendar.Behavior)]
     public bool ShowWeekTotal { get; set; } = true;
@@ -30,6 +39,9 @@ public partial class MudTotalCalendar : MudCalendar.MudCalendar
     /// <summary>
     /// If true the totals for each month are shown.
     /// </summary>
+    /// <remarks>
+    /// Defaults to <c>true</c>.
+    /// </remarks>
     [Parameter]
     [Category(CategoryTypes.Calendar.Behavior)]
     public bool ShowMonthTotal { get; set; } = true;
