@@ -1,7 +1,8 @@
 @inherits MudCalendar
-@using Microsoft.AspNetCore.Components.Rendering
+@using Microsoft.JSInterop
 @using CategoryTypes = Heron.MudCalendar.Attributes.CategoryTypes
 @using CategoryAttribute = Heron.MudCalendar.Attributes.CategoryAttribute
+@inject IJSRuntime JsRuntime
 
 @Render
 
@@ -18,12 +19,6 @@
                 <div class="mud-cal-total-name">@value.Definition.Name</div>
                 <div class="mud-cal-total-value">@ValueDefinition.FormatValue(value)</div>
             </div>;
-
-    protected override RenderFragment RenderHeaderContent => __builder =>
-    {
-        base.RenderHeaderContent(__builder);
-        <link href="_content/Heron.MudTotalCalendar/Heron.MudTotalCalendar.min.css" rel="stylesheet"/>
-    };
 
     protected override RenderFragment RenderMonthView =>
         @<TotalMonthView />;

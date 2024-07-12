@@ -17,7 +17,7 @@ namespace Heron.MudTotalCalendar.Docs
         {
             var theme = new MudTheme()
             {
-                Palette = LandingPageLightPalette,
+                PaletteLight = LandingPageLightPalette,
                 PaletteDark = LandingPageDarkPalette,
                 Shadows = LandingPageShadows,
                 LayoutProperties = LandingPageLayoutProperties,
@@ -31,7 +31,7 @@ namespace Heron.MudTotalCalendar.Docs
         {
             var theme = new MudTheme()
             {
-                Palette = DocsLightPalette,
+                PaletteLight = DocsLightPalette,
                 PaletteDark = DocsDarkPalette,
                 LayoutProperties = new LayoutProperties()
             };
@@ -42,7 +42,7 @@ namespace Heron.MudTotalCalendar.Docs
 
         #region Docs
 
-        private static readonly Palette DocsLightPalette = new()
+        private static readonly PaletteLight DocsLightPalette = new()
         {
             Black = "#110e2d",
             AppbarText = "#424242",
@@ -52,12 +52,12 @@ namespace Heron.MudTotalCalendar.Docs
             GrayLighter = "#f9f9f9"
         };
 
-        private static readonly Palette DocsDarkPalette  = new()
+        private static readonly PaletteDark DocsDarkPalette  = new()
         {
             Primary = "#7e6fff",
             Surface= "#1e1e2d",
             Background = "#1a1a27",
-            BackgroundGrey = "#151521",
+            BackgroundGray = "#151521",
             AppbarText = "#92929f",
             AppbarBackground = "rgba(26,26,39,0.8)",
             DrawerBackground = "#1a1a27",
@@ -144,11 +144,11 @@ namespace Heron.MudTotalCalendar.Docs
                 TextTransform = "none"
             }
         };
-        private static readonly Palette LandingPageLightPalette = new()
+        private static readonly PaletteLight LandingPageLightPalette = new()
         {
             AppbarText = "#424242",
             AppbarBackground = "rgba(0,0,0,0)",
-            BackgroundGrey = "#F9FAFC",
+            BackgroundGray = "#F9FAFC",
             TextSecondary = "#425466",
             Dark = "#110E2D",
             DarkLighten = "#1A1643",
@@ -156,11 +156,11 @@ namespace Heron.MudTotalCalendar.Docs
             GrayLight = "#9CA3AF",
             GrayLighter = "#adbdccff"
         };
-        private static readonly Palette LandingPageDarkPalette = new()
+        private static readonly PaletteDark LandingPageDarkPalette = new()
         {
             AppbarText = "#92929f",
             AppbarBackground = "rgba(0,0,0,0)",
-            BackgroundGrey = "#1a1a27",
+            BackgroundGray = "#1a1a27",
             Surface= "#1e1e2d",
             Background = "#151521",
             Dark = "#111019",
