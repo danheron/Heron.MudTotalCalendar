@@ -1,4 +1,6 @@
 using Heron.MudCalendar;
+using MudBlazor.Extensions;
+using MudBlazor.Utilities;
 
 namespace Heron.MudTotalCalendar;
 
@@ -9,6 +11,32 @@ public partial class TotalMonthView : MonthView
     private bool ShowTotalColumn => TotalCalendar.ShowWeekTotal;
     
     protected override int Columns => ShowTotalColumn ? 8 : 7;
+
+    private int TotalRows => Rows + (TotalCalendar.ShowMonthTotal ? 1 : 0);
+    
+    protected override string GridStyle =>
+        new StyleBuilder()
+            .AddStyle("grid-template-columns", $"repeat({Columns}, minmax(10px, 1fr))")
+            .AddStyle("grid-template-rows",
+                $"repeat({TotalRows}, {(100.0 / TotalRows).ToInvariantString()}%)",
+                Calendar.MonthCellMinHeight == 0)
+            .Build();
+    
+    protected override string ContentGridStyle =>
+        new StyleBuilder()
+            .AddStyle("grid-template-rows",
+                $"repeat({TotalRows}, {(100.0 / TotalRows).ToInvariantString()}%)",
+                Calendar.MonthCellMinHeight == 0)
+            .Build();
+
+    protected virtual string MonthTotalDayStyle(int index)
+    {
+        return new StyleBuilder()
+            .AddStyle("border-top", "1px solid var(--mud-palette-table-lines)")
+            .AddStyle("border-right", "1px solid var(--mud-palette-table-lines)", index == Columns - 2)
+            .AddStyle("width", $"{(100.0 / Columns).ToInvariantString()}%")
+            .Build();
+    }
 
     /// <summary>
     /// Classes added to the display of the total.

@@ -74,6 +74,7 @@ public partial class MudTotalCalendar : MudCalendar.MudCalendar
         if (!string.IsNullOrEmpty(head) && head.Contains("Heron.MudTotalCalendar.min.css")) return;
 
         // Add link
+        _jsService.OnLinkLoaded += (_, _) => Refresh();
         await _jsService.AddLink("_content/Heron.MudTotalCalendar/Heron.MudTotalCalendar.min.css", "stylesheet");
     }
 }

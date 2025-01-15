@@ -27,8 +27,8 @@ public class TotalCalendarTests : BunitTest
         
         comp.SetParam(x => x.CurrentDay, new DateTime(2023, 2, 1));
 
-        comp.Find("div.mud-cal-month-view div.mud-cal-month-cell:nth-child(8) div.mud-cal-total-cell").Should()
-            .NotBeNull();
+        var firstDayDate = comp.FindAll("div.mud-drop-zone")[0].Attributes["identifier"]!.TextContent;
+        DateTime.Parse(firstDayDate).DayOfWeek.Should().Be(DayOfWeek.Sunday);
     }
 
     [Test]
@@ -60,7 +60,7 @@ public class TotalCalendarTests : BunitTest
         
         // Month View
         comp.SetParam(x => x.CurrentDay, new DateTime(2023, 1, 1));
-        comp.Find("div.mud-cal-month-cell.mud-cal-month-link").Click();
+        comp.Find("div.mud-drop-zone a").Click();
         textField.Instance.Text.Should().Be("26");
         
         // Week View
