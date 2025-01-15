@@ -1,10 +1,53 @@
-<MudPopoverProvider />
+@using Heron.MudCalendar
+<MudTotalCalendar Items="_events" Values="BuildTestData()" Height="@(_fixed ? 1400 : 0)" MonthCellMinHeight="@(_fixed ? 0 : 115)" />
 
-<MudTotalCalendar Values="BuildTestData()" MonthCellMinHeight="115" />
+<MudSwitch class="mt-4" @bind-Value="@_fixed" Color="Color.Primary" T="bool">Fixed Height</MudSwitch>
 
 @code {
+    
+    public static string __description__ = "MudTotalCalendar Height Tests";
 
-    public static string __description__ = "Basic MudTotalCalendar Tests";
+    private bool _fixed = true;
+    
+    private List<CalendarItem> _events = new()
+    {
+        new CalendarItem
+        {
+            Start = DateTime.Today.AddHours(10),
+            End = DateTime.Today.AddHours(11),
+            Text = "Event 1"
+        },
+        new CalendarItem
+        {
+            Start = DateTime.Today.AddHours(11),
+            End = DateTime.Today.AddHours(12),
+            Text = "Event 2"
+        },
+        new CalendarItem
+        {
+            Start = DateTime.Today.AddHours(13),
+            End = DateTime.Today.AddHours(14),
+            Text = "Event 3"
+        },
+        new CalendarItem
+        {
+            Start = DateTime.Today.AddHours(14),
+            End = DateTime.Today.AddHours(15),
+            Text = "Event 4"
+        },
+        new CalendarItem
+        {
+            Start = DateTime.Today.AddHours(17),
+            End = DateTime.Today.AddHours(18),
+            Text = "Event 5"
+        },
+        new CalendarItem
+        {
+            Start = DateTime.Today.AddHours(17),
+            End = DateTime.Today.AddHours(18),
+            Text = "Event 6"
+        }
+    };
 
     private List<Value> BuildTestData()
     {
@@ -61,5 +104,5 @@
             new() { Date = DateTime.Today.AddDays(-2), Definition = total, Amount = 8.76 }
         };
     }
-
+    
 }

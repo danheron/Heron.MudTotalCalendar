@@ -1,7 +1,7 @@
 name: deploy-mudtotalcalendar-docs
 env:
   PUBLISH_FOLDER: './Heron.MudTotalCalendar/Heron.MudTotalCalendar.Docs/bin/Release/net8.0/publish/wwwroot'
-  MUDCALENDAR_VERSION: 2.0.2
+  MUDCALENDAR_VERSION: 3.0.0
 
 on:
   workflow_dispatch:

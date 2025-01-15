@@ -4,98 +4,123 @@
 
 @code {
 
-    protected override RenderFragment RenderHeader => __builder =>
+    protected override RenderFragment RenderHeader =>
+        @<div class="mud-cal-grid-header mud-cal-month-grid-header" style="@GridStyle">
+            @for (var i = 0; i < Columns - (ShowTotalColumn ? 1 : 0); i++)
+            {
+                <div class="mud-cal-month-header">
+                    @RenderDayTitle(i)
+                </div>
+            }
+
+            @if (ShowTotalColumn)
+            {
+                <div class="mud-cal-month-header">Total</div>
+            }
+        </div>;
+
+    protected override RenderFragment RenderContents => __builder =>
     {
-        for (var i = 0; i < Columns - (ShowTotalColumn ? 1 : 0); i++)
+        for (var row = 0; row < Rows; row++)
         {
-            <div class="mud-cal-month-header">
-                @RenderDayTitle(i)
+            <div class="mud-cal-month-row-holder" style="@RowStyle">
+                @for (var cell = row * Columns; cell < (row * Columns) + Columns; cell++)
+                {
+                    var currentCell = Cells[cell];
+                    @if (((TotalCell)currentCell).WeekTotal)
+                    {
+                        @RenderWeekTotalCell(currentCell, cell)
+                    }
+                    else if (((TotalCell)currentCell).MonthTotal)
+                    {
+                        @RenderMonthTotalCell(currentCell)
+                    }
+                    else
+                    {
+                        <MudDropZone T="CalendarItem" OnlyZone="true" Identifier="@currentCell.Date.Date.ToString("d")"
+                                     Class="@CellClassname" Style="@DayStyle(currentCell, cell)">
+                            @if (Calendar.CellClicked.HasDelegate)
+                            {
+                                <a @onclick="() => OnCellLinkClicked(currentCell)" class="mud-cal-month-cell-link">
+                                    <div class="mud-cal-month-link">
+                                        @RenderCellDayNumber(currentCell)
+                                    </div>
+                                </a>
+                            }
+                            else
+                            {
+                                @RenderCellDayNumber(currentCell)
+                            }
+
+                            @RenderDayTotalCell(currentCell)
+                        </MudDropZone>
+                    }
+                }
+                @RenderCellContents(row)
             </div>
         }
 
-        if (ShowTotalColumn)
-        {
-            <div class="mud-cal-month-header">Total</div>
-        }
-    };
-
-    protected override RenderFragment RenderBody => __builder =>
-    {
-        base.RenderBody(__builder);
-        
         if (TotalCalendar.ShowMonthTotal)
         {
             RenderMonthTotalRow(__builder);
         }
     };
 
-    protected override RenderFragment RenderCell(CalendarCell cell) => __builder =>
-    {
-        if (((TotalCell)cell).WeekTotal)
-        {
-            @RenderWeekTotalCell(cell)
-        }
-        else if (((TotalCell)cell).MonthTotal)
-        {
-            @RenderMonthTotalCell(cell)
-        }
-        else
-        {
-            @RenderDayTotalCell(cell)
-        }
-    };
-
     /// <summary>
     /// Renders the last row of the grid that shows the month total.
     /// </summary>
-    protected virtual RenderFragment RenderMonthTotalRow => __builder =>
-    {
-        for (var i = 0; i < Columns - 1; i++)
-        {
-            <div></div>
-        }
-        
-        @RenderMonthTotalCell(Cells.Last())
-    };
+    protected virtual RenderFragment RenderMonthTotalRow =>
+        @<div class="mud-cal-month-row-holder" style="@RowStyle">
+            @for (var i = 0; i < Columns - 1; i++)
+            {
+                <div style="@MonthTotalDayStyle(i)"></div>
+            }
+
+            @RenderMonthTotalCell(Cells.Last())
+        </div>;
 
     /// <summary>
     /// Renders the contents of a day total cell.
     /// </summary>
     protected virtual RenderFragment RenderDayTotalCell(CalendarCell cell) => __builder =>
     {
-        @RenderCellDayNumber(cell)
         if (TotalCalendar.ShowDayTotal)
         {
-            foreach (var value in ((TotalCell)cell).Values)
-            {
-                @RenderTotal(value)
-            }
+            <div class="mud-cal-month-cell-header">
+                @foreach (var value in ((TotalCell)cell).Values)
+                {
+                    @RenderTotal(value)
+                }
+            </div>
         }
-        @RenderCellContents(cell)
     };
 
     /// <summary>
     /// Renders a cell that shows totals for the week.
     /// </summary>
-    protected virtual RenderFragment RenderWeekTotalCell(CalendarCell cell) =>
-        @<div class="mud-cal-month-cell mud-cal-total-cell">
-            <div class="mud-cal-month-cell-title">Week Total</div>
-            @foreach (var value in ((TotalCell)cell).Values)
-            {
-                @RenderTotal(value)
-            }
+    protected virtual RenderFragment RenderWeekTotalCell(CalendarCell currentCell, int cell) =>
+        @<div class="mud-cal-month-cell mud-cal-total-cell" style="@DayStyle(currentCell, cell)">
+            <div class="mud-cal-month-cell-title mud-cal-month-cell-header">Week Total</div>
+            <div class="mud-cal-month-cell-header">
+                @foreach (var value in ((TotalCell)currentCell).Values)
+                {
+                    @RenderTotal(value)
+                }
+            </div>
         </div>;
 
     /// <summary>
     /// Renders a cell that shows the totals for the month.
     /// </summary>
     protected virtual RenderFragment RenderMonthTotalCell(CalendarCell cell) =>
-        @<div class="mud-cal-month-cell mud-cal-total-cell">
-            <div class="mud-cal-month-cell-title">Month Total</div>
-            @foreach (var value in ((TotalCell)cell).Values)
-            {
-                @RenderTotal(value)
-            }
+        @<div class="mud-cal-month-cell mud-cal-total-cell" style="@DayStyle(cell, Columns - 1)">
+            <div class="mud-cal-month-cell-title mud-cal-month-cell-header">Month Total</div>
+            <div class="mud-cal-month-cell-header">
+                @foreach (var value in ((TotalCell)cell).Values)
+                {
+                    @RenderTotal(value)
+                }
+            </div>
         </div>;
 
     /// <summary>

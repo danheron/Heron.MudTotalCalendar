@@ -3,14 +3,14 @@
     <PropertyGroup>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+        <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     </PropertyGroup>
 
     <PropertyGroup>
         <PackageId>Heron.MudTotalCalendar</PackageId>
         <Authors>Dan Heron</Authors>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <Copyright>Copyright 2023 Dan Heron</Copyright>
+        <Copyright>Copyright 2025 Dan Heron</Copyright>
         <PackageTags>Calendar, Blazor, MudBlazor, Components, Blazor Components, Blazor Library</PackageTags>
         <Description>A calendar component for displaying numerical data with totals.</Description>
         <PackageProjectUrl>https://danheron.github.io/Heron.MudTotalCalendar</PackageProjectUrl>
@@ -25,12 +25,19 @@
         <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+
     <ItemGroup>
         <None Include="..\README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-        <DocumentationFile>bin\Debug\net8.0\Heron.MudTotalCalendar.xml</DocumentationFile>
+        <DocumentationFile>bin\Debug\net9.0\Heron.MudTotalCalendar.xml</DocumentationFile>
         <NoWarn>1701;1702;IL2121;1591</NoWarn>
     </PropertyGroup>
 
@@ -55,17 +62,17 @@
         <Delete Files="@(FilesToClean)" />
     </Target>
 
-    <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.20" />
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.11" />
     </ItemGroup>
 
-    <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.8" />
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net9.0' ">
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.0" />
     </ItemGroup>
     
     <ItemGroup>
-        <PackageReference Include="Heron.MudCalendar" Version="2.0.2" />
-        <PackageReference Include="MudBlazor" Version="7.7.0" />
+        <PackageReference Include="Heron.MudCalendar" Version="3.0.0-beta.2" />
+        <PackageReference Include="MudBlazor" Version="8.0.0-rc.2" />
     </ItemGroup>
 
     <Target Name="ToolRestore">
