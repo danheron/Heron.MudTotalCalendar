@@ -1,12 +1,17 @@
+using System.Diagnostics.CodeAnalysis;
 using Heron.MudCalendar;
 using MudBlazor.Extensions;
 using MudBlazor.Utilities;
 
 namespace Heron.MudTotalCalendar;
 
-public partial class TotalMonthView : MonthView
+/// <summary>
+/// 
+/// </summary>
+/// <typeparam name="T">The type of item displayed in this month view.</typeparam>
+public partial class TotalMonthView<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T> : MonthView<T> where T:CalendarItem
 {
-    private MudTotalCalendar TotalCalendar => (MudTotalCalendar)Calendar;
+    private MudTotalCalendar<T> TotalCalendar => (MudTotalCalendar<T>)Calendar;
 
     private bool ShowTotalColumn => TotalCalendar.ShowWeekTotal;
     
@@ -58,18 +63,18 @@ public partial class TotalMonthView : MonthView
         return definition.Style;
     }
 
-    protected override List<CalendarCell> BuildCells()
+    protected override List<CalendarCell<T>> BuildCells()
     {
         var cells = base.BuildCells();
         var values = TotalCalendar.Values;
 
-        var totalMonth = new TotalCell { MonthTotal = true };
-        var totalWeek = new TotalCell { WeekTotal = true };
-        var totalCells = new List<CalendarCell>();
+        var totalMonth = new TotalCell<T> { MonthTotal = true };
+        var totalWeek = new TotalCell<T> { WeekTotal = true };
+        var totalCells = new List<CalendarCell<T>>();
         foreach (var cell in cells)
         {
             // Convert CalendarCell to TotalCell
-            var totalCell = new TotalCell(cell);
+            var totalCell = new TotalCell<T>(cell);
             totalCells.Add(totalCell);
             totalCell.AddValues(values.Where(v => v.Date == totalCell.Date).ToList());
             
@@ -80,8 +85,8 @@ public partial class TotalMonthView : MonthView
             // If last day of week then add the week total
             if (CalendarDateRange.GetDayOfWeek(totalCell.Date) == 6 && ShowTotalColumn)
             {
-                totalCells.Add(TotalCalendar.ShowWeekTotal ? totalWeek : new TotalCell());
-                totalWeek = new TotalCell { WeekTotal = true };
+                totalCells.Add(TotalCalendar.ShowWeekTotal ? totalWeek : new TotalCell<T>());
+                totalWeek = new TotalCell<T> { WeekTotal = true };
             }
         }
 

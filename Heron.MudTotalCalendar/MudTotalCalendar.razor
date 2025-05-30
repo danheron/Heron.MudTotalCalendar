@@ -1,8 +1,9 @@
-@inherits MudCalendar
+@inherits MudCalendar<T>
 @using Microsoft.JSInterop
 @using CategoryTypes = Heron.MudCalendar.Attributes.CategoryTypes
 @using CategoryAttribute = Heron.MudCalendar.Attributes.CategoryAttribute
 @inject IJSRuntime JsRuntime
+@typeparam T
 
 @Render
 
@@ -21,6 +22,6 @@
             </div>;
 
     protected override RenderFragment RenderMonthView =>
-        @<TotalMonthView />;
+        @<TotalMonthView T="T" />;
 
 }

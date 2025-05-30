@@ -1,4 +1,7 @@
 .mud-cal-total-cell {
+  height: 100%;
   background-color: #00000005;
+  border-right: 1px solid var(--mud-palette-table-lines);
+  border-top: 1px solid var(--mud-palette-table-lines);
   border-left: 2px solid var(--mud-palette-table-lines);
 }

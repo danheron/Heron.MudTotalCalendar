@@ -1,6 +1,7 @@
+@using Heron.MudCalendar
 <MudPopoverProvider />
 
-<MudTotalCalendar CellClicked="TestClick" ShowDay="true" ShowWeek="true" ShowWeekTotal="false" ShowMonthTotal="true" />
+<MudTotalCalendar T="CalendarItem" CellClicked="TestClick" ShowDay="true" ShowWeek="true" ShowWeekTotal="false" ShowMonthTotal="true" />
 <MudTextField @bind-Value="_value" />
 
 @code {

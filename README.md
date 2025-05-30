@@ -27,13 +27,22 @@ Add the following to `_Imports.razor`
 @using Heron.MudTotalCalendar
 ```
 
+Add style and script references (optional). This step shouldn't be necessary as the component injects the references into the page as needed. However if you find that calendar is not displaying properly then add the following to your `index.html` or `_Layout.cshtml`/`_Host.cshtml`
+
+```html
+<link href="_content/Heron.MudCalendar/Heron.MudCalendar.min.css" rel="stylesheet" />
+<link href="_content/Heron.MudTotalCalendar/Heron.MudTotalCalendar.min.css" rel="stylesheet" />
+...
+<script type="module" src="_content/Heron.MudCalendar/Heron.MudCalendar.min.js"></script>
+```
+
 Add the MudCalendar component to your razor page/component
 
 ```razor
-<MudTotalCalendar />
+<MudTotalCalendar T="CalendarItem"/>
 ```
 
-Check out the examples of how to use and customize the MudCalendar component.
+Check out the examples of how to use and customize the MudTotalCalendar component.
 
 ## Support
 

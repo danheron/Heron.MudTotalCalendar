@@ -1,8 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
 using Heron.MudCalendar;
 
 namespace Heron.MudTotalCalendar;
 
-public class TotalCell : CalendarCell
+public class TotalCell<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T> : CalendarCell<T> where T:CalendarItem
 {
     public List<Value> Values { get; set; } = new();
     
@@ -14,7 +15,7 @@ public class TotalCell : CalendarCell
     {
     }
 
-    public TotalCell(CalendarCell cell)
+    public TotalCell(CalendarCell<T> cell)
     {
         Date = cell.Date;
         Items = cell.Items;
