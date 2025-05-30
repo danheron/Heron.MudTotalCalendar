@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+using Heron.MudCalendar;
 using Heron.MudCalendar.Attributes;
 using Heron.MudCalendar.Services;
 using Microsoft.AspNetCore.Components;
@@ -7,7 +9,7 @@ namespace Heron.MudTotalCalendar;
 /// <summary>
 /// Calendar component for displaying numerical data with totals.
 /// </summary>
-public partial class MudTotalCalendar : MudCalendar.MudCalendar
+public partial class MudTotalCalendar<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T> : MudCalendar<T> where T:CalendarItem
 {
     /// <summary>
     /// The data used to calculate the totals to be displayed in the calendar.

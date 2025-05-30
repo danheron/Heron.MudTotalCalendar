@@ -23,7 +23,7 @@ public class TotalCalendarTests : BunitTest
     public void WeekStartSunday()
     {
         var cut = Context.RenderComponent<TotalCalendarTest>();
-        var comp = cut.FindComponent<MudTotalCalendar>();
+        var comp = cut.FindComponent<MudTotalCalendar<CalendarItem>>();
         
         comp.SetParam(x => x.CurrentDay, new DateTime(2023, 2, 1));
 
@@ -35,7 +35,7 @@ public class TotalCalendarTests : BunitTest
     public void ShowDayView()
     {
         var cut = Context.RenderComponent<TotalCalendarViewTest>();
-        var comp = cut.FindComponent<MudTotalCalendar>();
+        var comp = cut.FindComponent<MudTotalCalendar<CalendarItem>>();
 
         comp.FindComponent<EnumSwitch<CalendarView>>().Find("div").ClassList.Should().NotContain("d-none");
         comp.FindComponent<EnumSwitch<CalendarView>>().FindAll("button")[2].TextContent.Should().Be("Day");
@@ -45,7 +45,7 @@ public class TotalCalendarTests : BunitTest
     public void ShowWeekView()
     {
         var cut = Context.RenderComponent<TotalCalendarViewTest>();
-        var comp = cut.FindComponent<MudTotalCalendar>();
+        var comp = cut.FindComponent<MudTotalCalendar<CalendarItem>>();
 
         comp.FindComponent<EnumSwitch<CalendarView>>().Find("div").ClassList.Should().NotContain("d-none");
         comp.FindComponent<EnumSwitch<CalendarView>>().FindAll("button")[1].TextContent.Should().Be("Week");
@@ -55,7 +55,7 @@ public class TotalCalendarTests : BunitTest
     public void CellClick()
     {
         var cut = Context.RenderComponent<TotalCalendarEventsTest>();
-        var comp = cut.FindComponent<MudTotalCalendar>();
+        var comp = cut.FindComponent<MudTotalCalendar<CalendarItem>>();
         var textField = cut.FindComponent<MudTextField<string>>();
         
         // Month View

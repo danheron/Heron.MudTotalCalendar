@@ -71,7 +71,7 @@
     </ItemGroup>
     
     <ItemGroup>
-        <PackageReference Include="Heron.MudCalendar" Version="3.0.0" />
+        <PackageReference Include="Heron.MudCalendar" Version="3.2.0" />
         <PackageReference Include="MudBlazor" Version="8.0.0" />
     </ItemGroup>
 

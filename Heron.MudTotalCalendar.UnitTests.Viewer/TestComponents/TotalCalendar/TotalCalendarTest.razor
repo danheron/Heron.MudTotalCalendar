@@ -1,6 +1,7 @@
+@using Heron.MudCalendar
 <MudPopoverProvider />
 
-<MudTotalCalendar Values="BuildTestData()" MonthCellMinHeight="115" />
+<MudTotalCalendar T="CalendarItem" Values="BuildTestData()" MonthCellMinHeight="115" />
 
 @code {
 
