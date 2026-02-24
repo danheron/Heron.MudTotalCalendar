@@ -4,6 +4,7 @@ using FluentAssertions;
 using Heron.MudCalendar;
 using Heron.MudTotalCalendar.UnitTests.Viewer.TestComponents.TotalCalendar;
 using MudBlazor;
+using MudBlazor.Extensions;
 
 namespace Heron.MudTotalCalendar.UnitTests.Components;
 
@@ -61,18 +62,18 @@ public class TotalCalendarTests : BunitTest
         // Month View
         comp.SetParam(x => x.CurrentDay, new DateTime(2023, 1, 1));
         comp.Find("div.mud-drop-zone a").Click();
-        textField.Instance.Text.Should().Be("26");
+        textField.Instance.GetState(x => x.Text).Should().Be("26");
         
         // Week View
         comp.SetParam(x => x.View, CalendarView.Week);
         comp.SetParam(x => x.CurrentDay, new DateTime(2023, 1, 13));
         comp.Find("div.mud-cal-week-layer a").Click();
-        textField.Instance.Text.Should().Be("9");
+        textField.Instance.GetState(x => x.Text).Should().Be("9");
         
         // Day View
         comp.SetParam(x => x.View, CalendarView.Day);
         comp.SetParam(x => x.CurrentDay, new DateTime(2023, 1, 8));
         comp.Find("div.mud-cal-week-layer a").Click();
-        textField.Instance.Text.Should().Be("8");
+        textField.Instance.GetState(x => x.Text).Should().Be("8");
     }
 }
