@@ -83,8 +83,9 @@ public partial class TotalMonthView<[DynamicallyAccessedMembers(DynamicallyAcces
             totalWeek.AddValues(totalCell.Values);
 
             // If last day of week then add the week total
-            if (CalendarDateRange.GetDayOfWeek(totalCell.Date) == 6 && ShowTotalColumn)
+            if (CalendarDateRange.GetDayOfWeek(totalCell.Date, Calendar.Culture, Calendar.FirstDayOfWeek) == 6 && ShowTotalColumn)
             {
+                totalWeek.Date = totalCell.Date;
                 totalCells.Add(TotalCalendar.ShowWeekTotal ? totalWeek : new TotalCell<T>());
                 totalWeek = new TotalCell<T> { WeekTotal = true };
             }
